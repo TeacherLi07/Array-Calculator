@@ -97,12 +97,12 @@ void getinit()
         if(init[0]=='a')
         {
             a[val1]=val2;
-            iscalca[i]=1;
+            iscalca[val1]=1;
         }
         else if(init[0]=='s')
         {
            s[val1]=val2;
-            iscalcs[i]=1;
+            iscalcs[val1]=1;
         }
     }
 }
@@ -152,14 +152,14 @@ void sum_arr()
 void array2sum()
 {
     for(int i=1;i<=n;i++)
-        if(!(iscalcs[i] || iscalca[i]))
+        if(!iscalcs[i])
             s[i]=a[i]+s[i-1];
 }
 
 void sum2array()
 {
     for(int i=1;i<=n;i++)
-        if(!(iscalcs[i] || iscalca[i]))
+        if(!iscalca[i])
             a[i]=s[i]-s[i-1];
 }
 
