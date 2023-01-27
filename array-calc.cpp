@@ -23,7 +23,7 @@ int main()
     system("cls");
     cout<<"*****************************************************************"<<endl;
     cout<<"                           数列计算器"<<endl;
-    cout<<"                       Version alhpa1.1"<<endl;
+    cout<<"                          Version 1.0"<<endl;
     cout<<"          编写者：TeacherLi李信辉，部分代码来源于ChatGPT"<<endl;
     cout<<"*****************************************************************"<<endl<<endl;
 L1:    cout<<"使用说明："<<endl<<endl;
