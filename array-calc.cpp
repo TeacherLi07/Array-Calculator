@@ -10,42 +10,82 @@ void printans();
 void array2sum();
 void sum2array();
 
-int priority(char op);
-int performOperation(int a, int b, char op);
-int evaluateExpression(string expression);
+long long priority(char op);
+long long performOperation(long long a, long long b, char op);
+long long evaluateExpression(string expression);
 
 string equa;
-int mode,a[N],s[N],n;
+long long mode,a[N],s[N],n;
 bool iscalca[N],iscalcs[N];
-string modewd[3]={"an=","sn="};
+string modewd[3]={"","an=","sn="};
 int main()
 {
+    system("title 数列计算器V1.1 by TeacherLi");
+    system("mode con cols=120 lines=30");
+    system("color f0");
     system("cls");
-    cout<<"*****************************************************************"<<endl;
-    cout<<"                           数列计算器"<<endl;
-    cout<<"                          Version 1.0"<<endl;
-    cout<<"          编写者：TeacherLi李信辉，部分代码来源于ChatGPT"<<endl;
-    cout<<"*****************************************************************"<<endl<<endl;
-L1:    cout<<"使用说明："<<endl<<endl;
-    cout<<"代数式用半角（英文）字符表示,支持加（+）减（-）乘（*）除（/）乘方（^）,暂不支持根号。"<<endl<<endl;
-    cout<<"数列某项以an表示，前n项和以sn表示，计算总项数最大为100000项。"<<endl<<endl;
-    cout<<"序数下标如果有多项，请为下标打括号。"<<endl<<endl;
-    cout<<"合法表达例如：an；a(n+1)；a((3n+5)^2)；a114。"<<endl<<endl;
-    cout<<"乘方运算中，指数和底数如非单字母或纯数字，需要打括号。"<<endl<<endl;
-    cout<<"表达式中n与x等价，大小写不敏感，不支持小数，可以用分数表示。"<<endl<<endl;
-    cout<<"如果输入非法或者无法计算，可能会有各种奇奇怪怪的现象，如果不确定是否为bug可以联系我或提交issue。"<<endl<<endl<<endl;
+    cout<<"========================================================================================================================"<<endl;
+    cout<<"||                                                                                                                    ||"<<endl;
+    cout<<"||                                                                                                                    ||"<<endl;
+    cout<<"||                                                                                                                    ||"<<endl;
+    cout<<"||                                                                                                                    ||"<<endl;
+    cout<<"||                                                                                                                    ||"<<endl;
+    cout<<"||                                                                                                                    ||"<<endl;
+    cout<<"||                                                                                                                    ||"<<endl;
+    cout<<"||                                                                                                                    ||"<<endl;
+    cout<<"||                                                                                                                    ||"<<endl;
+    cout<<"||                                                     数列计算器                                                     ||"<<endl;
+    cout<<"||                                                                                                                    ||"<<endl;
+    cout<<"||                                                    Version 1.1                                                     ||"<<endl;
+    cout<<"||                                                                                                                    ||"<<endl;
+    cout<<"||                                   编写者：TeacherLi李信辉，部分代码来源于ChatGPT                                   ||"<<endl;
+    cout<<"||                                                                                                                    ||"<<endl;
+    cout<<"||                                  https://github.com/TeacherLi07/Array-Calculator                                   ||"<<endl;
+    cout<<"||                                                                                                                    ||"<<endl;
+    cout<<"||                                                    按回车键继续                                                    ||"<<endl;
+    cout<<"||                                                                                                                    ||"<<endl;
+    cout<<"||                                                                                                                    ||"<<endl;
+    cout<<"||                                                                                                                    ||"<<endl;
+    cout<<"||                                                                                                                    ||"<<endl;
+    cout<<"||                                                                                                                    ||"<<endl;
+    cout<<"||                                                                                                                    ||"<<endl;
+    cout<<"||                                                                                                                    ||"<<endl;
+    cout<<"||                                                                                                                    ||"<<endl;
+    cout<<"||                                                                                                                    ||"<<endl;
+    cout<<"||                                                                                                                    ||"<<endl;
+    cout<<"========================================================================================================================";
+    getchar();
+    system("cls");
+L1:
+    cout<<"========================================================================================================================"<<endl;
+    cout<<"|| 使用说明：                                                                                                         ||"<<endl;
+    cout<<"||                                                                                                                    ||"<<endl;
+    cout<<"|| 代数式用半角（英文）字符表示，支持加（+）减（-）乘（*）除（/）乘方（^），暂不支持根号。                            ||"<<endl;
+    cout<<"||                                                                                                                    ||"<<endl;
+    cout<<"|| 数列某项以an表示，前n项和以sn表示，计算总项数最大为10000项。                                                       ||"<<endl;
+    cout<<"||                                                                                                                    ||"<<endl;
+    cout<<"|| 序数下标如果有多项，请为下标打括号。                                                                               ||"<<endl;
+    cout<<"||                                                                                                                    ||"<<endl;
+    cout<<"|| 合法表达例如：an；a(n+1)；a((3n+5)^2)；a114。                                                                      ||"<<endl;
+    cout<<"||                                                                                                                    ||"<<endl;
+    cout<<"|| 乘方运算中，指数和底数如非单字母或纯数字，需要打括号。                                                             ||"<<endl;
+    cout<<"||                                                                                                                    ||"<<endl;
+    cout<<"|| 表达式中n与x等价，大小写不敏感，不支持小数，可以用分数表示。                                                       ||"<<endl;
+    cout<<"||                                                                                                                    ||"<<endl;
+    cout<<"|| 如果输入非法或者无法计算，可能会有各种奇奇怪怪的现象，如果不确定是否为bug可以联系我或提交issue。                   ||"<<endl;
+    cout<<"========================================================================================================================"<<endl<<endl;
     cout<<"计算模式：\n1.an表达式\n2.sn表达式\n表达式均可含有n、s、a\n请输入模式：";
     cin>>mode;
-    cout<<"请输入"<<modewd[mode-1];
+    cout<<"请输入"<<modewd[mode];
     cin>>equa;
     transform(equa.begin(),equa.end(),equa.begin(),::tolower);//处理大小写敏感问题，使用方法已注明
-    for(int i=0;i<equa.length();i++)//处理x和n问题，使用方法已注明
+    for(long long i=0;i<equa.length();i++)//处理x和n问题，使用方法已注明
         equa[i]= equa[i]=='x' ? 'n' : equa[i];
-    for(int i=1;i<equa.length();i++)
+    for(long long i=1;i<equa.length();i++)
         if((equa[i]=='n' || equa[i]=='a' || equa[i]=='s') && isdigit(equa[i-1]))
         {
             char whichsymbol=1;//判断xn前是什么符号
-            for(int j=i-1;j>=0;j--)
+            for(long long j=i-1;j>=0;j--)
                 if(!isdigit(equa[j]))
                 {
                     whichsymbol=equa[j];
@@ -70,6 +110,7 @@ L1:    cout<<"使用说明："<<endl<<endl;
         goto L1;
     }
     printans();
+    return 0;
 }
 
 void getinit()
@@ -81,8 +122,8 @@ void getinit()
         if(init=="-1")
             return;
         transform(init.begin(),init.end(),init.begin(),::tolower);
-        int val1 = 0,val2=0;
-        int i=1;
+        long long val1 = 0,val2=0;
+        long long i=1;
         while (i < init.length() && isdigit(init[i]))
         {
             val1 = (val1*10) + (init[i] - '0');
@@ -110,12 +151,12 @@ void getinit()
 void gene_arr()
 {
     sum2array();
-    for(int i=1;i<=n;i++)
+    for(long long i=1;i<=n;i++)
     {
         if(iscalca[i])
             continue;
         string equan=equa;
-        for(int j=0;j<equan.length();j++)
+        for(long long j=0;j<equan.length();j++)
         {
             if(equan[j]=='n')
             {
@@ -131,12 +172,12 @@ void gene_arr()
 void sum_arr()
 {
     array2sum();
-    for(int i=1;i<=n;i++)
+    for(long long i=1;i<=n;i++)
     {
         if(iscalca[i])
             continue;
         string equan=equa;
-        for(int j=0;j<equan.length();j++)
+        for(long long j=0;j<equan.length();j++)
         {
             if(equan[j]=='n')
             {
@@ -151,14 +192,14 @@ void sum_arr()
 
 void array2sum()
 {
-    for(int i=1;i<=n;i++)
+    for(long long i=1;i<=n;i++)
         if(!iscalcs[i])
             s[i]=a[i]+s[i-1];
 }
 
 void sum2array()
 {
-    for(int i=1;i<=n;i++)
+    for(long long i=1;i<=n;i++)
         if(!iscalca[i])
             a[i]=s[i]-s[i-1];
 }
@@ -166,13 +207,13 @@ void sum2array()
 void printans()
 {
     cout<<"n\tan\tSn\t"<<endl;
-    for(int i=1;i<=n;i++)
+    for(long long i=1;i<=n;i++)
         cout<<i<<"\t"<<a[i]<<"\t"<<s[i]<<"\t"<<endl;
     cout<<"计算完毕，";
     system("pause");
 }
 
-int priority(char op) {
+long long priority(char op) {
     if (op == '+' || op == '-')
         return 1;
     if (op == '*' || op == '/')
@@ -182,7 +223,7 @@ int priority(char op) {
     return 0;
 }
 
-int performOperation(int a, int b, char op) {
+long long performOperation(long long a, long long b, char op) {
     switch(op) {
         case '+': return a + b;
         case '-': return a - b;
@@ -193,11 +234,11 @@ int performOperation(int a, int b, char op) {
     return 0;
 }
 
-int evaluateExpression(string expression) {
-    stack<int> values;
+long long evaluateExpression(string expression) {
+    stack<long long> values;
     stack<char> operators;
 
-    for (int i = 0; i < expression.length(); i++) {
+    for (long long i = 0; i < expression.length(); i++) {
         if (expression[i] == ' ')
             continue;
 
@@ -205,7 +246,7 @@ int evaluateExpression(string expression) {
             operators.push(expression[i]);
 
         else if (isdigit(expression[i])) {
-            int val = 0;
+            long long val = 0;
             while (i < expression.length() && isdigit(expression[i])) {
                 val = (val*10) + (expression[i] - '0');
                 i++;
@@ -218,7 +259,7 @@ int evaluateExpression(string expression) {
         {
             if (isdigit(expression[i+1]))
             {
-                int val=0;
+                long long val=0;
                 while (i < expression.length() && isdigit(expression[i])) 
                 {
                     val = (val*10) + (expression[i] - '0');
@@ -228,7 +269,7 @@ int evaluateExpression(string expression) {
             }
             else if (expression[i+1]=='(')
             {
-                int flag=0;
+                long long flag=0;
                 while (i+flag < expression.length() && expression[i+flag]!=')') 
                 {
                     flag++;
@@ -242,7 +283,7 @@ int evaluateExpression(string expression) {
         {
             if (isdigit(expression[i+1]))
             {
-                int val=0;
+                long long val=0;
                 while (i < expression.length() && isdigit(expression[i])) 
                 {
                     val = (val*10) + (expression[i] - '0');
@@ -252,7 +293,7 @@ int evaluateExpression(string expression) {
             }
             else if (expression[i+1]=='(')
             {
-                int flag=0;
+                long long flag=0;
                 while (i+flag < expression.length() && expression[i+flag]!=')') 
                 {
                     flag++;
@@ -264,10 +305,10 @@ int evaluateExpression(string expression) {
 
         else if (expression[i] == ')') {
             while (!operators.empty() && operators.top() != '(') {
-                int val2 = values.top();
+                long long val2 = values.top();
                 values.pop();
 
-                int val1 = values.top();
+                long long val1 = values.top();
                 values.pop();
 
                 char op = operators.top();
@@ -282,10 +323,10 @@ int evaluateExpression(string expression) {
 
         else {
             while (!operators.empty() && priority(operators.top()) >= priority(expression[i])) {
-                int val2 = values.top();
+                long long val2 = values.top();
                 values.pop();
 
-                int val1 = values.top();
+                long long val1 = values.top();
                 values.pop();
 
                 char op = operators.top();
@@ -299,10 +340,10 @@ int evaluateExpression(string expression) {
     }
 
     while (!operators.empty()) {
-        int val2 = values.top();
+        long long val2 = values.top();
         values.pop();
 
-        int val1 = values.top();
+        long long val1 = values.top();
         values.pop();
 
         char op = operators.top();
