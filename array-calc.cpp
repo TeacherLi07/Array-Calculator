@@ -24,7 +24,7 @@ string modewd[3]={"","an=","sn="};
 
 int main()
 {
-    system("title 数列计算器V1.1 by TeacherLi");
+    system("title 数列计算器V1.2 by TeacherLi");
     system("color f0");
     system("cls");
     SetWindow(120,30,120,2000);
@@ -41,7 +41,7 @@ int main()
     cout<<"||                                                                                                                    ||"<<endl;
     cout<<"||                                                     数列计算器                                                     ||"<<endl;
     cout<<"||                                                                                                                    ||"<<endl;
-    cout<<"||                                                    Version 1.1                                                     ||"<<endl;
+    cout<<"||                                                    Version 1.2                                                     ||"<<endl;
     cout<<"||                                                                                                                    ||"<<endl;
     cout<<"||                                   编写者：TeacherLi李信辉，部分代码来源于ChatGPT                                   ||"<<endl;
     cout<<"||                                                                                                                    ||"<<endl;
