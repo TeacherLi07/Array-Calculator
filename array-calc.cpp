@@ -14,6 +14,8 @@ int priority(char op);
 int performOperation(double a, double b, char op);
 double evaluateExpression(string expression);
 
+void SetWindow(int Width, int Height, int WidthBuffer, int HeightBuffer);
+
 string equa;
 double a[N],s[N],n;
 int mode;
@@ -23,9 +25,9 @@ string modewd[3]={"","an=","sn="};
 int main()
 {
     system("title ÊýÁÐ¼ÆËãÆ÷V1.1 by TeacherLi");
-    system("mode con cols=120 lines=30");
     system("color f0");
     system("cls");
+    SetWindow(120,30,120,2000);
     cout<<fixed<<setprecision(0);
     cout<<"========================================================================================================================"<<endl;
     cout<<"||                                                                                                                    ||"<<endl;
@@ -358,3 +360,19 @@ double evaluateExpression(string expression) {
 
     return values.top();
 }
+
+void SetWindow(int Width, int Height, int WidthBuffer, int HeightBuffer) { 
+    _COORD coord; 
+    coord.X = WidthBuffer; 
+    coord.Y = HeightBuffer; 
+
+    _SMALL_RECT Rect; 
+    Rect.Top = 0; 
+    Rect.Left = 0; 
+    Rect.Bottom = Height - 1; 
+    Rect.Right = Width - 1; 
+
+    HANDLE Handle = GetStdHandle(STD_OUTPUT_HANDLE);      // Get Handle 
+    SetConsoleScreenBufferSize(Handle, coord);            // Set Buffer Size 
+    SetConsoleWindowInfo(Handle, TRUE, &Rect);            // Set Window Size 
+}  // SetWindow
