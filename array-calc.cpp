@@ -10,8 +10,10 @@ void printans();
 void array2sum();
 void sum2array();
 
+double calcNinExpression(int n, string n_expression);
+
 int priority(char op);
-int performOperation(double a, double b, char op);
+double performOperation(double a, double b, char op);
 double evaluateExpression(string expression);
 
 void SetWindow(int Width, int Height, int WidthBuffer, int HeightBuffer);
@@ -24,11 +26,11 @@ string modewd[3]={"","an=","sn="};
 
 int main()
 {
-    system("title 数列计算器V1.2 by TeacherLi");
+    system("title 数列计算器V1.3 by TeacherLi");
     system("color f0");
     system("cls");
     SetWindow(120,30,120,2000);
-    cout<<fixed<<setprecision(0);
+    cout.setf(ios::fixed,ios::floatfield);
     cout<<"========================================================================================================================"<<endl;
     cout<<"||                                                                                                                    ||"<<endl;
     cout<<"||                                                                                                                    ||"<<endl;
@@ -41,7 +43,7 @@ int main()
     cout<<"||                                                                                                                    ||"<<endl;
     cout<<"||                                                     数列计算器                                                     ||"<<endl;
     cout<<"||                                                                                                                    ||"<<endl;
-    cout<<"||                                                    Version 1.2                                                     ||"<<endl;
+    cout<<"||                                                    Version 1.3                                                     ||"<<endl;
     cout<<"||                                                                                                                    ||"<<endl;
     cout<<"||                                   编写者：TeacherLi李信辉，部分代码来源于ChatGPT                                   ||"<<endl;
     cout<<"||                                                                                                                    ||"<<endl;
@@ -156,6 +158,17 @@ void getinit()
     }
 }
 
+double calcNinExpression(int number, string n_expression)
+{
+    for(int i=0;i<n_expression.length();i++)
+        if(n_expression[i]=='n')
+        {
+            n_expression.erase(i,1);
+            n_expression.insert(i,to_string(number));
+        }
+    return evaluateExpression(n_expression);
+}
+
 void gene_arr()
 {
     sum2array();
@@ -163,16 +176,7 @@ void gene_arr()
     {
         if(iscalca[i])
             continue;
-        string equan=equa;
-        for(int j=0;j<equan.length();j++)
-        {
-            if(equan[j]=='n')
-            {
-                equan.erase(j,1);
-                equan.insert(j,to_string(i));
-            }
-        }
-        a[i]=evaluateExpression(equan);
+        a[i]=calcNinExpression(i,equa);
     }
     array2sum();
 }
@@ -231,7 +235,7 @@ int priority(char op) {
     return 0;
 }
 
-int performOperation(double a, double b, char op) {
+double performOperation(double a, double b, char op) {
     switch(op) {
         case '+': return a + b;
         case '-': return a - b;
@@ -254,7 +258,7 @@ double evaluateExpression(string expression) {
             operators.push(expression[i]);
 
         else if (isdigit(expression[i])) {
-            int val = 0;
+            double val = 0;
             while (i < expression.length() && isdigit(expression[i])) {
                 val = (val*10) + (expression[i] - '0');
                 i++;
@@ -280,7 +284,8 @@ double evaluateExpression(string expression) {
                 int flag=0;
                 while (i+flag < expression.length() && expression[i+flag]!=')') 
                     flag++;
-                values.push(a[int(evaluateExpression(expression.substr(i+1,flag)))]);
+                int val=int(evaluateExpression(expression.substr(i+1,flag)));
+                values.push(a[val]);
                 i+=flag;
             }
         }
@@ -301,9 +306,7 @@ double evaluateExpression(string expression) {
             {
                 int flag=0;
                 while (i+flag < expression.length() && expression[i+flag]!=')') 
-                {
                     flag++;
-                }
                 values.push(s[int(evaluateExpression(expression.substr(i+1,flag+1)))]);
                 i+=flag;
             }
